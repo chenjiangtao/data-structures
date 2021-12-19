@@ -1,4 +1,4 @@
-﻿package chapter04.array;
+package chapter04.array;
 
 import java.io.IOException;
 

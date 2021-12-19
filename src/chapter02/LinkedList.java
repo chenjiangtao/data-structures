@@ -296,8 +296,9 @@ public class LinkedList<T extends Comparable<T>> implements List<T> {
 
         @Override
         public T next() {
-            if (!hasNext())
+            if (!hasNext()) {
                 throw new NoSuchElementException();
+            }
 
             lastReturned = next;
             next = next.getNext();
@@ -310,11 +311,13 @@ public class LinkedList<T extends Comparable<T>> implements List<T> {
     // 设计一个算法实现链表逆置，要求不增加额外存储空间
     public void ReverseList() {
         LinkedListNode<T> p1, p2, p3;
-        if (head.getNext() == null)
+        if (head.getNext() == null) {
             return;
+        }
         p1 = head.getNext();
-        if (p1.getNext() == null)
+        if (p1.getNext() == null) {
             return;
+        }
         p2 = p1.getNext();
         p3 = p2.getNext();
         p1.setNext(null);
@@ -322,8 +325,9 @@ public class LinkedList<T extends Comparable<T>> implements List<T> {
             p2.setNext(p1);
             p1 = p2;
             p2 = p3;
-            if (p3 != null)
+            if (p3 != null) {
                 p3 = p3.getNext();
+            }
         }
         head.setNext(p1);
     }
@@ -334,19 +338,23 @@ public class LinkedList<T extends Comparable<T>> implements List<T> {
     public LinkedListNode<T> getReverseK(int k) {
         LinkedListNode<T> p1, p2;
         int count = 0;
-        if (head.getNext() == null)
+        if (head.getNext() == null) {
             return null;
+        }
         p1 = head.getNext();
         p2 = p1;
-        if (p1.getNext() == null && k == 1)
+        if (p1.getNext() == null && k == 1) {
             return p1;
+        }
         while (count < k - 1) {
-            if (p2 != null)
+            if (p2 != null) {
                 p2 = p2.getNext();
+            }
             count++;
         }
-        if (p2 == null)
+        if (p2 == null) {
             return null;
+        }
         while (p2.getNext() != null) {
             p1 = p1.getNext();
             p2 = p2.getNext();
@@ -362,14 +370,16 @@ public class LinkedList<T extends Comparable<T>> implements List<T> {
         p1 = head.getNext();
         p2 = head2.getNext();
         if (p1 == null || p2 == null) {
-            if (p1 == null)
+            if (p1 == null) {
                 head = head2;
+            }
         }
 
-        if (p1.getData().compareTo(p2.getData()) <= 0)
+        if (p1.getData().compareTo(p2.getData()) <= 0) {
             newhead = head;
-        else
+        } else {
             newhead = head2;
+        }
         tail = newhead;
         while (p1 != null && p2 != null) {
             if (p1.getData().compareTo(p2.getData()) <= 0) {
@@ -382,10 +392,12 @@ public class LinkedList<T extends Comparable<T>> implements List<T> {
                 p2 = p2.getNext();
             }
         }
-        if (p1 != null)
+        if (p1 != null) {
             tail.setNext(p1);
-        if (p2 != null)
+        }
+        if (p2 != null) {
             tail.setNext(p2);
+        }
 
         head = newhead;
     }
@@ -398,19 +410,22 @@ public class LinkedList<T extends Comparable<T>> implements List<T> {
         LinkedListNode<T> L2 = new LinkedListNode<T>();
         LinkedListNode<T> p1, p2 = null, tail;
         p1 = head.getNext();
-        if (p1 != null)
+        if (p1 != null) {
             p2 = p1.getNext();
+        }
         list.setHead(L2);
         tail = head;
         while (p1 != null && p2 != null) {
             tail.setNext(p1);
             tail = p1;
-            if (p2 != null)
+            if (p2 != null) {
                 p1 = p2.getNext();
+            }
             p2.setNext(L2.getNext());
             L2.setNext(p2);
-            if (p1 != null)
+            if (p1 != null) {
                 p2 = p1.getNext();
+            }
         }
         if (p1 != null) {
             tail.setNext(p1);

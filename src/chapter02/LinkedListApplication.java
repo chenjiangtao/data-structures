@@ -1,4 +1,4 @@
-﻿package chapter02;
+package chapter02;
 
 public class LinkedListApplication<T extends Comparable<T>> {
     //算法2-22：单链表的倒置

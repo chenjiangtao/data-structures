@@ -25,9 +25,9 @@ public class BinaryTree<T> {
 
     public int Height(BinaryTreeNode<T> node) {
         int hl = 0, hr = 0, h = 0;
-        if (node == null)
+        if (node == null) {
             return h;
-        else {
+        } else {
             hl = Height(node.getLeftChild());
             hr = Height(node.getRightChild());
             return (hl >= hr ? hl + 1 : hr + 1);
@@ -41,9 +41,9 @@ public class BinaryTree<T> {
 
     public int CountNode(BinaryTreeNode<T> node) {
         int nl = 0, nr = 0, n = 0;
-        if (node == null)
+        if (node == null) {
             return n;
-        else {
+        } else {
             nl = CountNode(node.getLeftChild());
             nr = CountNode(node.getRightChild());
             return nl + nr + 1;
@@ -92,10 +92,12 @@ public class BinaryTree<T> {
         myqueue.enQueue(root);
         while (!myqueue.isEmpty()) {
             BinaryTreeNode<T> node = myqueue.deQueue();
-            if (node.getLeftChild() != null)
+            if (node.getLeftChild() != null) {
                 myqueue.enQueue(node.getLeftChild());
-            if (node.getRightChild() != null)
+            }
+            if (node.getRightChild() != null) {
                 myqueue.enQueue(node.getRightChild());
+            }
             System.out.print(node.getData());
         }
     }
@@ -205,14 +207,16 @@ public class BinaryTree<T> {
 
     //递归打印所有路径
     public void AllPath1(BinaryTreeNode<T> node, ArrayList<String> array, int pathlen) {
-        if (node == null)
+        if (node == null) {
             return;
+        }
         array.add(pathlen, (String) node.getData());
         pathlen++;
         if (node.getLeftChild() == null && node.getRightChild() == null) {
             int i = 0;
-            for (; i < pathlen - 1; i++)
+            for (; i < pathlen - 1; i++) {
                 System.out.print(array.get(i).toString() + "-->");
+            }
             System.out.println(array.get(i).toString());
         } else {
             AllPath1(node.getLeftChild(), array, pathlen);

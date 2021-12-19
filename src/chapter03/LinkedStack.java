@@ -39,8 +39,9 @@ public class LinkedStack<T> implements Stack<T> {
     public int getSize() {
         LinkedStackNode<T> p = top;
         int count = 0;
-        if (top == null)
+        if (top == null) {
             return count;
+        }
         while (p != null) {
             p = p.getNext();
             count++;

@@ -1,4 +1,4 @@
-﻿package chapter04.string;
+package chapter04.string;
 
 import java.util.Arrays;
 import java.util.Scanner;
@@ -56,6 +56,7 @@ public class String {
         System.arraycopy(value, srcBegin, dst, dstBegin, srcEnd - srcBegin);
     }
 
+    @Override
     public boolean equals(Object anObject) {
         if (this == anObject) {
             return true;
@@ -68,8 +69,9 @@ public class String {
                 char v2[] = anotherString.value;
                 int i = 0;
                 while (n-- != 0) {
-                    if (v1[i] != v2[i])
+                    if (v1[i] != v2[i]) {
                         return false;
+                    }
                     i++;
                 }
                 return true;
@@ -234,7 +236,9 @@ public class String {
         for (int i = sourceOffset + fromIndex; i <= max; i++) {
             /* Look for first character. */
             if (source[i] != first) {
-                while (++i <= max && source[i] != first) ;
+                while (++i <= max && source[i] != first) {
+                    ;
+                }
             }
 
             /* Found first character, now look at the rest of v2 */
@@ -242,8 +246,9 @@ public class String {
                 int j = i + 1;
                 int end = j + targetCount - 1;
                 for (int k = targetOffset + 1; j < end && source[j]
-                        == target[k]; j++, k++)
+                        == target[k]; j++, k++) {
                     ;
+                }
 
                 if (j == end) {
                     /* Found whole string. */

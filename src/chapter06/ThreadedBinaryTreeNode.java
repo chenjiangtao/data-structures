@@ -1,4 +1,4 @@
-﻿package chapter06;
+package chapter06;
 
 public class ThreadedBinaryTreeNode<T> {
     private T data;  /* 定义数据域，T代表实际需要的类型 */

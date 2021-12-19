@@ -1,4 +1,4 @@
-﻿package chapter07;
+package chapter07;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
+
 
 
 public class GraphMatrix<T> {
@@ -125,8 +126,10 @@ public class GraphMatrix<T> {
      * TE={}开始，重复执行下述操作： 在所有的顶点u属于U，v属于V-U的边（u，v）属于E中找到一条代价最小的边(u0，v0)，
      * 并将(u0，v0)入集合TE； 同时，v0并入U，直至U=V为止。此时TE中必有n-1条边，则T=(V,{TE}) 为N的最小生成树。
      *
-     * @param matrix           图的矩阵（元素值为边的权值） 0：表示起点终点为同一节点；∞：表示两节点之间不存在边。
-     * @param startVertexIndex 开始节点的索引号
+     * @param matrix
+     *            图的矩阵（元素值为边的权值） 0：表示起点终点为同一节点；∞：表示两节点之间不存在边。
+     * @param startVertexIndex
+     *            开始节点的索引号
      */
     public static void prim(double[][] matrix, int startVertexIndex) {
         // vertexCount：图的顶点数
@@ -178,8 +181,8 @@ public class GraphMatrix<T> {
     static void printPrimTree(int[] array) {
         System.out.print("{");
         for (int i = 0; i < array.length; i++) {
-            if (array[i] != -1) {
-                System.out.print("(v" + array[i] + ",v" + i + ")");
+            if(array[i]!=-1){
+                System.out.print("(v"+array[i]+",v"+i+")");
             }
 
         }
@@ -189,13 +192,13 @@ public class GraphMatrix<T> {
     public void testPrim() {
         double oo = Double.POSITIVE_INFINITY;
         double[][] matrix = {
-                {0, 6, 5, oo, oo, oo, oo},
-                {6, 0, 9, oo, 13, oo, oo},
-                {5, 9, 0, 16, oo, 12, oo},
-                {oo, oo, 16, 0, 14, 7, oo},
-                {oo, 13, oo, 15, 0, oo, 8},
-                {oo, oo, oo, 7, oo, 0, 4},
-                {oo, oo, oo, oo, 8, 4, 0}
+                {  0,  6,  5, oo, oo, oo, oo },
+                {  6,  0,  9, oo, 13, oo, oo },
+                {  5,  9,  0, 16, oo, 12, oo },
+                { oo, oo, 16,  0, 14,  7, oo },
+                { oo, 13, oo, 15,  0, oo,  8 },
+                { oo, oo, oo,  7, oo,  0,  4 },
+                { oo, oo, oo, oo,  8,  4,  0 }
         };
         GraphMatrix graph = new GraphMatrix(matrix, false);
         graph.prim(0);
@@ -213,8 +216,10 @@ public class GraphMatrix<T> {
      * 否则舍去此边而选择下一条最小的边。
      * 以此类推，直至T中所有的顶点都在同一连通分量上为止。
      *
-     * @param vertexCount 图中的节点集合
-     * @param edges       图中边的集合
+     * @param vertexCount
+     *            图中的节点集合
+     * @param edges
+     *            图中边的集合
      */
     public void kruskal(int vertexCount, Edge[] edges) {
         Arrays.sort(edges);// 将边按照权重w升序排序
@@ -240,12 +245,11 @@ public class GraphMatrix<T> {
                     endComponent = j;
                 }
             }
-            if (startCompoment < 0 || endComponent < 0) {
+            if (startCompoment < 0 || endComponent < 0)
                 System.err.println("没有在子树中找到节点，错误");
-            }
 
             if (startCompoment != endComponent) {
-                System.out.print("(start:" + start + ",end:" + end + ",weight:" + edges[i].weight + "),");
+                System.out.print("(start:" + start + ",end:" + end + ",weight:" + edges[i].weight+"),");
                 ArrayList<Integer> setj = connectedComponents.get(endComponent);
                 ArrayList<Integer> seti = connectedComponents.get(startCompoment);
                 seti.addAll(setj);
@@ -265,8 +269,8 @@ public class GraphMatrix<T> {
         int edgeIndex = 0;
         for (int row = 0; row < this.vertexes.length; row++) {
             for (int column = 0; column < this.vertexes.length; column++) {
-                if (!this.isDirectedGraph) {
-                    if (row < column) {
+                if(!this.isDirectedGraph){
+                    if(row<column){
                         continue;
                     }
                 }
@@ -279,28 +283,28 @@ public class GraphMatrix<T> {
         kruskal(this.vertexes.length, edges);
     }
 
-    public void testKruscal() {
+    public void testKruscal(){
         double oo = Double.POSITIVE_INFINITY;
         double[][] matrix = {
-                {0, 7, oo, oo, 9, oo},
-                {7, 0, 5, 1, oo, 2},
-                {oo, 5, 0, oo, oo, 6},
-                {oo, 1, oo, 0, oo, 2},
-                {9, oo, oo, oo, 0, 1},
-                {oo, 2, 6, 2, 1, 0}
+                {  0,  7, oo, oo,  9, oo},
+                {  7,  0,  5,  1, oo,  2},
+                { oo,  5,  0, oo, oo,  6},
+                { oo,  1, oo,  0, oo,  2},
+                {  9, oo, oo, oo,  0,  1},
+                { oo,  2,  6,  2,  1,  0}
         };
         GraphMatrix graph = new GraphMatrix(matrix, false);
         graph.kruskal();
     }
 
-    static void printDijkstra(int[] parent, double[] distant, int start, int end) {
-        int p = parent[end];
-        String path = "v" + end;
-        while (p != -1) {
-            path = "v" + p + "-->" + path;
-            p = parent[p];
+    static void printDijkstra(int[] parent,double[] distant,int start,int end) {
+        int p=parent[end];
+        String path="v"+end;
+        while(p!=-1){
+            path = "v"+p+"-->"+path;
+            p =parent[p];
         }
-        System.out.println("v" + start + "->v" + end + "[" + path + "]:" + distant[end] + ";");
+        System.out.println("v"+start+"->v"+end+"["+path+"]:"+distant[end]+";");
     }
 
     /*
@@ -353,24 +357,24 @@ public class GraphMatrix<T> {
                     parent[w] = minIndex;
                 }
             }
-            printDijkstra(parent, distant, v0, i);
+            printDijkstra(parent,distant,v0,i);
         }
 
     }
 
-    public void testDijkstra() {
+    public void testDijkstra(){
         double oo = Double.POSITIVE_INFINITY;
         double[][] matrix = {
-                {0, oo, 1, oo, oo, oo, oo, oo, oo, oo},
-                {4, 0, 10, oo, oo, oo, oo, oo, oo, oo},
-                {oo, oo, 0, 3, oo, 9, oo, oo, oo, oo},
-                {oo, 1, oo, 0, 3, oo, oo, oo, oo, oo},
-                {oo, oo, oo, oo, 0, 1, 1, 3, 7, oo},
-                {oo, oo, oo, oo, oo, 0, 2, oo, oo, 2},
-                {oo, oo, oo, oo, oo, oo, 0, oo, oo, oo},
-                {oo, oo, oo, oo, oo, oo, oo, 0, oo, oo},
-                {oo, oo, oo, oo, oo, oo, oo, oo, 0, oo},
-                {oo, oo, oo, oo, oo, oo, oo, oo, 1, 0}
+                {  0, oo,  1, oo, oo, oo, oo, oo, oo, oo},
+                {  4,  0, 10, oo, oo, oo, oo, oo, oo, oo},
+                { oo, oo,  0,  3, oo,  9, oo, oo, oo, oo},
+                { oo,  1, oo,  0,  3, oo, oo, oo, oo, oo},
+                { oo, oo, oo, oo,  0,  1,  1,  3,  7, oo},
+                { oo, oo, oo, oo, oo,  0,  2, oo, oo,  2},
+                { oo, oo, oo, oo, oo, oo,  0, oo, oo, oo},
+                { oo, oo, oo, oo, oo, oo, oo,  0, oo, oo},
+                { oo, oo, oo, oo, oo, oo, oo, oo,  0, oo},
+                { oo, oo, oo, oo, oo, oo, oo, oo,  1,  0}
         };
         GraphMatrix.dijkstra(matrix, 0);
     }

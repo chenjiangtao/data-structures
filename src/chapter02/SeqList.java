@@ -52,12 +52,14 @@ public class SeqList<T extends Comparable<T>> implements List<T> {
     public int search(T data) {
         int i = 0;
         while ((i < this.size) && (this.elements[i] != data))
-            /* 当位置i的元素不等于x时，继续向下比对 */
+            /* 当位置i的元素不等于x时，继续向下比对 */ {
             i = i + 1;
-        if (i == this.size) /* 判断比对位置是否已经超出地址范围 */
+        }
+        if (i == this.size) /* 判断比对位置是否已经超出地址范围 */ {
             return (-1); /* 返回查找不成功的标志 */
-        else
+        } else {
             return (i); /* 返回查找到的给定值所在下标 */
+        }
     }
 
     @Override
@@ -149,7 +151,7 @@ public class SeqList<T extends Comparable<T>> implements List<T> {
         int index = 0, listIndex = 0, mergedListIndex = 0;
         SeqList<T> mergedList = new SeqList<T>(this.capacity + list.capacity);
         while ((index < this.size) && (listIndex < list.size()))
-            /* 当i和j都在合理范围内时 */
+            /* 当i和j都在合理范围内时 */ {
             if (this.get(index).compareTo(list.get(listIndex)) < 0) {
                 mergedList.elements[mergedListIndex] = this.elements[index];
                 index++;
@@ -159,18 +161,20 @@ public class SeqList<T extends Comparable<T>> implements List<T> {
                 listIndex++;
                 mergedListIndex++;
             }
-        if (index < this.size) /* 如果i还在合理范围内，即还有剩余元素 */
+        }
+        if (index < this.size) /* 如果i还在合理范围内，即还有剩余元素 */ {
             while (index < this.size) /* 将当前列表中的所有剩余元素放入mergedList中 */ {
                 mergedList.elements[mergedListIndex] = this.elements[index];
                 index++;
                 mergedListIndex++;
             }
-        else
+        } else {
             while (listIndex < list.size) /* 将anotherList中的所有剩余元素放入mergedList中 */ {
                 mergedList.elements[mergedListIndex] = list.elements[listIndex];
                 listIndex++;
                 mergedListIndex++;
             }
+        }
         mergedList.size = mergedListIndex; /*mergedList中的元素总数 */
         return (mergedList); /* 返回mergedList */
     }
@@ -194,11 +198,14 @@ public class SeqList<T extends Comparable<T>> implements List<T> {
 
     public void Union(SeqList<T> la, SeqList<T> lb) {
         int i, j;
-        for (i = 0; i < la.size(); i++)
+        for (i = 0; i < la.size(); i++) {
             insertAt(i, la.get(i));
-        for (j = 0; j < lb.size(); j++)
-            if (la.contains(lb.get(j)) == false)
+        }
+        for (j = 0; j < lb.size(); j++) {
+            if (la.contains(lb.get(j)) == false) {
                 insertAt(i++, lb.get(j));
+            }
+        }
     }
 
     public static void main(String[] args) {

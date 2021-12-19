@@ -1,4 +1,4 @@
-﻿package chapter08;
+package chapter08;
 
 
 public class BlockSearching<T extends Comparable<T>, E> {

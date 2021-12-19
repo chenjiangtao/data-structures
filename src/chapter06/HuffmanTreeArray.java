@@ -1,4 +1,4 @@
-﻿package chapter06;
+package chapter06;
 
 import java.util.ArrayList;
 import java.util.HashMap;

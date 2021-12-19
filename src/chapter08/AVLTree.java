@@ -32,29 +32,34 @@ public class AVLTree<T extends Comparable<T>, E> {
     }
 
     public void printTree() {
-        if (isEmpty())
+        if (isEmpty()) {
             System.out.println("Empty tree");
-        else
+        } else {
             printTree(root);
+        }
     }
 
     private AVLNode<T, E> insert(T key, E data, AVLNode<T, E> root) {
-        if (root == null)
+        if (root == null) {
             root = new AVLNode<T, E>(key, data);
-        else if (key.compareTo(root.key) < 0) {
+        } else if (key.compareTo(root.key) < 0) {
             root.leftChild = insert(key, data, root.leftChild);
-            if (height(root.leftChild) - height(root.rightChild) == 2)
-                if (key.compareTo(root.leftChild.key) < 0)
+            if (height(root.leftChild) - height(root.rightChild) == 2) {
+                if (key.compareTo(root.leftChild.key) < 0) {
                     root = rotateWithLeftLeft(root);
-                else
+                } else {
                     root = rotateWithLeftRight(root);
+                }
+            }
         } else if (key.compareTo(root.key) > 0) {
             root.rightChild = insert(key, data, root.rightChild);
-            if (height(root.rightChild) - height(root.leftChild) == 2)
-                if (key.compareTo(root.rightChild.key) > 0)
+            if (height(root.rightChild) - height(root.leftChild) == 2) {
+                if (key.compareTo(root.rightChild.key) > 0) {
                     root = rotateWithRightRight(root);
-                else
+                } else {
                     root = rotateWithRightLeft(root);
+                }
+            }
         }
         root.height = max(height(root.leftChild), height(root.rightChild)) + 1;
         return root;
@@ -101,30 +106,35 @@ public class AVLTree<T extends Comparable<T>, E> {
     }
 
     private AVLNode<T, E> findMin(AVLNode<T, E> root) {
-        if (root == null)
+        if (root == null) {
             return null;
-        else if (root.leftChild == null)
+        } else if (root.leftChild == null) {
             return root;
+        }
         return findMin(root.leftChild);
     }
 
     private AVLNode<T, E> findMax(AVLNode<T, E> root) {
-        if (root != null)
-            while (root.rightChild != null)
+        if (root != null) {
+            while (root.rightChild != null) {
                 root = root.rightChild;
+            }
+        }
 
         return root;
     }
 
     private AVLNode<T, E> find(T key, AVLNode<T, E> root) {
-        if (root == null)
+        if (root == null) {
             return null;
-        if (key.compareTo(root.key) < 0)
+        }
+        if (key.compareTo(root.key) < 0) {
             return find(key, root.leftChild);
-        else if (key.compareTo(root.key) > 0)
+        } else if (key.compareTo(root.key) > 0) {
             return find(key, root.rightChild);
-        else
+        } else {
             return root; // Match
+        }
     }
 
     private void printTree(AVLNode<T, E> root) {

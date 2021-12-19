@@ -36,8 +36,9 @@ public class ShortestPath {
             // 用此结点更新其它结点的距离
             for (int i = 0; i < matrix.length; i++) {
                 if (!foundedSet.contains(i) && matrix[currentMinIndex][i] != maxDis
-                        && matrix[currentMinIndex][i] + distanceMap.get(currentMinIndex) < distanceMap.get(i))
+                        && matrix[currentMinIndex][i] + distanceMap.get(currentMinIndex) < distanceMap.get(i)) {
                     distanceMap.put(i, matrix[currentMinIndex][i] + distanceMap.get(currentMinIndex));
+                }
             }
 
             // 放入findedset

@@ -43,8 +43,9 @@ public class CircleList<T> {
         LinkedListNode<Integer> node;
         int i, j;
         CircleList<Integer> clist = new CircleList();
-        for (i = 0; i < 13; i++)
+        for (i = 0; i < 13; i++) {
             clist.add(new LinkedListNode<Integer>(0, clist.getHead()));
+        }
         node = clist.getHead().getNext();
         node.setData(1);
         for (i = 2; i < 14; i++) {
@@ -53,7 +54,9 @@ public class CircleList<T> {
             for (j = 0; j < i; ) {
                 node = node.getNext();
                 if (node == clist.getHead())//头结点排除在外
+                {
                     node = node.getNext();
+                }
                 if (node.getData() == 0) {
                     j++;
                 }

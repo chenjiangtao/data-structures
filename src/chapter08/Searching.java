@@ -1,4 +1,4 @@
-﻿package chapter08;
+package chapter08;
 
 public class Searching<T extends Comparable<T>, E> {
     /**

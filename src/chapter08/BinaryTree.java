@@ -1,4 +1,4 @@
-﻿package chapter08;
+package chapter08;
 
 public class BinaryTree<T extends Comparable<T>, E> {
     private BinaryNode<T, E> root;
@@ -170,68 +170,77 @@ public class BinaryTree<T extends Comparable<T>, E> {
      * Print the tree contents in sorted order.
      */
     public void printTree() {
-        if (isEmpty())
+        if (isEmpty()) {
             System.out.println("Empty tree");
-        else
+        } else {
             printTree(root);
+        }
     }
 
     private BinaryNode<T, E> insert(T key, E data, BinaryNode<T, E> root) {
-        if (root == null)
+        if (root == null) {
             root = new BinaryNode<T, E>(key, data);
-        else if (key.compareTo(root.key) < 0)
+        } else if (key.compareTo(root.key) < 0) {
             root.leftChild = insert(key, data, root.leftChild);
-        else if (key.compareTo(root.key) > 0)
+        } else if (key.compareTo(root.key) > 0) {
             root.rightChild = insert(key, data, root.rightChild);
+        }
         return root;
     }
 
     private BinaryNode<T, E> remove(T key, BinaryNode<T, E> root) {
         BinaryNode<T, E> node = this.find(key, root);
 
-        if (node == null)
+        if (node == null) {
             return root;
-        if (key.compareTo(root.key) < 0)
+        }
+        if (key.compareTo(root.key) < 0) {
             root.leftChild = remove(key, root.leftChild);
-        else if (key.compareTo(root.key) > 0)
+        } else if (key.compareTo(root.key) > 0) {
             root.rightChild = remove(key, root.rightChild);
-        else if (root.leftChild != null && root.rightChild != null) // Two
+        } else if (root.leftChild != null && root.rightChild != null) // Two
         // children
         {
             BinaryNode<T, E> minNode = findMin(root.rightChild);
             root.key = minNode.key;
             root.data = minNode.data;
             root.rightChild = remove(root.key, root.rightChild);
-        } else
+        } else {
             root = (root.leftChild != null) ? root.leftChild : root.rightChild;
+        }
         return root;
     }
 
     private BinaryNode<T, E> findMin(BinaryNode<T, E> root) {
-        if (root == null)
+        if (root == null) {
             return null;
-        else if (root.getLeftChild() == null)
+        } else if (root.getLeftChild() == null) {
             return root;
+        }
         return findMin(root.getLeftChild());
     }
 
     private BinaryNode<T, E> findMax(BinaryNode<T, E> root) {
-        if (root != null)
-            while (root.rightChild != null)
+        if (root != null) {
+            while (root.rightChild != null) {
                 root = root.rightChild;
+            }
+        }
 
         return root;
     }
 
     private BinaryNode<T, E> find(T key, BinaryNode<T, E> root) {
-        if (root == null)
+        if (root == null) {
             return null;
-        if (key.compareTo(root.key) < 0)
+        }
+        if (key.compareTo(root.key) < 0) {
             return find(key, root.leftChild);
-        else if (key.compareTo(root.key) > 0)
+        } else if (key.compareTo(root.key) > 0) {
             return find(key, root.rightChild);
-        else
+        } else {
             return root;
+        }
     }
 
     private void printTree(BinaryNode<T, E> root) {

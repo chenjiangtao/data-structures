@@ -37,8 +37,9 @@ public class QueueArray<T> implements Queue<T> {
 
     @Override
     public boolean enQueue(T e) {
-        if ((rear + 1) % capacity == front)
+        if ((rear + 1) % capacity == front) {
             expandSpace();
+        }
         elements[rear] = e;
         rear = (rear + 1) % capacity;
         return true;
