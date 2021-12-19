@@ -127,7 +127,7 @@ public class GraphList<T> {
 		
 		System.out.println(this.vertexes[i].data);
 		isVisited[i] = true;
-		QueueArray<Integer> queue = new QueueArray<Integer>();
+		QueueArray<Integer> queue = new QueueArray<Integer>(1);
 		queue.enQueue(i);
 		
 		EdgeListNode currentNode =null;
@@ -164,8 +164,8 @@ public class GraphList<T> {
 		}
 
 		isVisited[startVertexIndex] = true;
-		QueueArray<Integer> queue = new QueueArray<Integer>();
-		QueueArray<Integer> shortestQueue = new QueueArray<Integer>();
+		QueueArray<Integer> queue = new QueueArray<Integer>(1);
+		QueueArray<Integer> shortestQueue = new QueueArray<Integer>(1);
 		queue.enQueue(startVertexIndex);
 		shortestQueue.enQueue(startVertexIndex);
 		
