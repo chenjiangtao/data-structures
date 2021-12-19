@@ -1,4 +1,5 @@
 package chapter03;
+
 public class LinkedStackNode<T> {
     private T data;
     private LinkedStackNode<T> next;

@@ -3,7 +3,7 @@ package chapter04.array;
 public class SparseMatrixNode<T> {
     private int rowIndex;
     private int columnIndex;
-    private  T value;
+    private T value;
 
     public int getRowIndex() {
         return rowIndex;
@@ -29,12 +29,12 @@ public class SparseMatrixNode<T> {
         this.value = value;
     }
 
-    public SparseMatrixNode(){
+    public SparseMatrixNode() {
 
     }
 
-    public SparseMatrixNode(int rowIndex,int columnIndex,T value){
-        this.rowIndex=rowIndex;
+    public SparseMatrixNode(int rowIndex, int columnIndex, T value) {
+        this.rowIndex = rowIndex;
         this.columnIndex = columnIndex;
         this.value = value;
     }

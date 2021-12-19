@@ -9,21 +9,25 @@ public class LinkedStack<T> implements Stack<T> {
         this.top.setNext(null);
     }
 
+    @Override
     public void clear() {
         this.top.setData(null);
         this.top.setNext(null);
     }
 
+    @Override
     public boolean isEmpty() {
 
         return (this.top).getNext() == null ? true : false;
     }
 
+    @Override
     public boolean isFull() {
 
         return false;
     }
 
+    @Override
     public void push(T e) {
         LinkedStackNode<T> p = new LinkedStackNode<T>();
         p.setData(e);
@@ -31,6 +35,7 @@ public class LinkedStack<T> implements Stack<T> {
         this.top = p;
     }
 
+    @Override
     public int getSize() {
         LinkedStackNode<T> p = top;
         int count = 0;
@@ -43,6 +48,7 @@ public class LinkedStack<T> implements Stack<T> {
         return count;
     }
 
+    @Override
     public T pop() {
         if (this.top == null)        /* 判断栈是否为空 */ {
             System.out.printf("栈空，无法出栈！");
@@ -53,6 +59,7 @@ public class LinkedStack<T> implements Stack<T> {
         return nodeData;
     }
 
+    @Override
     public T getTop() {
         if (this.top == null)        /* 判断栈是否为空 */ {
             System.out.printf("栈空，无法取栈顶！");

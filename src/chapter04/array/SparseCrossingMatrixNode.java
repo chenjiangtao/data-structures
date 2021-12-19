@@ -58,15 +58,15 @@ public class SparseCrossingMatrixNode<T> {
         this.down = down;
     }
 
-	public SparseCrossingMatrixNode(){
+    public SparseCrossingMatrixNode() {
 
-	}
+    }
 
-	public SparseCrossingMatrixNode(int row,int column,T value){
-		this.setRow(row);
-		this.setColumn(column);
-		this.setValue(value);
+    public SparseCrossingMatrixNode(int row, int column, T value) {
+        this.setRow(row);
+        this.setColumn(column);
+        this.setValue(value);
 
-	}
+    }
 
 }

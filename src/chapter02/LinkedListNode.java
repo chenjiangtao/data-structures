@@ -4,11 +4,11 @@ public class LinkedListNode<T> {
     private T data;
     private LinkedListNode<T> next;
 
-    public LinkedListNode(){
+    public LinkedListNode() {
 
     }
 
-    public LinkedListNode(T data,LinkedListNode<T> next){
+    public LinkedListNode(T data, LinkedListNode<T> next) {
         this.setData(data);
         this.setNext(next);
     }

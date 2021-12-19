@@ -12,26 +12,27 @@ public class CircleList<T> {
         return rear;
     }
 
-    public CircleList(){
+    public CircleList() {
         this.head = new LinkedListNode<T>();
         this.head.setData(null);
         this.head.setNext(this.head);
         this.rear = this.head;
     }
 
-    public void add(LinkedListNode<T> node){
+    public void add(LinkedListNode<T> node) {
         this.getRear().setNext(node);
         node.setNext(this.getHead());
         this.rear = node;
     }
-    public void display(){
+
+    public void display() {
         System.out.print("[");
         LinkedListNode<T> currentNode = this.head.getNext();
-        while(currentNode!=this.head){
+        while (currentNode != this.head) {
             T value = currentNode.getData();
             System.out.print(value.toString());
             currentNode = currentNode.getNext();
-            if(currentNode!=this.head){
+            if (currentNode != this.head) {
                 System.out.print(",");
             }
         }
@@ -40,23 +41,20 @@ public class CircleList<T> {
 
     public static void main(String[] args) {
         LinkedListNode<Integer> node;
-        int i,j;
-        CircleList<Integer> clist=new CircleList();
-        for(i=0;i<13;i++)
-            clist.add(new LinkedListNode<Integer>(0,clist.getHead()));
-        node=clist.getHead().getNext();
+        int i, j;
+        CircleList<Integer> clist = new CircleList();
+        for (i = 0; i < 13; i++)
+            clist.add(new LinkedListNode<Integer>(0, clist.getHead()));
+        node = clist.getHead().getNext();
         node.setData(1);
-        for(i=2;i<14;i++)
-        {
-            System.out.println("i="+i);
+        for (i = 2; i < 14; i++) {
+            System.out.println("i=" + i);
             clist.display();
-            for(j=0;j<i;)
-            {
-                node=node.getNext();
-                if(node==clist.getHead())//头结点排除在外
-                    node=node.getNext();
-                if(node.getData()==0)
-                {
+            for (j = 0; j < i; ) {
+                node = node.getNext();
+                if (node == clist.getHead())//头结点排除在外
+                    node = node.getNext();
+                if (node.getData() == 0) {
                     j++;
                 }
 

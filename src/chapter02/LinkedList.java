@@ -1,4 +1,5 @@
 package chapter02;
+
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
@@ -30,9 +31,11 @@ public class LinkedList<T extends Comparable<T>> implements List<T> {
     public LinkedListNode<T> getHead() {
         return this.head;
     }
+
     public void setHead(LinkedListNode<T> head) {
-        this.head=head;
+        this.head = head;
     }
+
     public LinkedListNode<T> searchRearNode() {
         LinkedListNode<T> rearNode = this.head;
         while (rearNode.getNext() != null) {
@@ -127,11 +130,12 @@ public class LinkedList<T extends Comparable<T>> implements List<T> {
             return false;
         }
     }
+
     @Override
     public boolean remove(T data) {
         LinkedListNode<T> priorNode = this.head;
         LinkedListNode<T> currentNode = this.head.getNext();
-        while ((currentNode != null) && currentNode.getData().compareTo(data)!=0) {
+        while ((currentNode != null) && currentNode.getData().compareTo(data) != 0) {
             priorNode = priorNode.getNext();
             currentNode = currentNode.getNext();
         }
@@ -139,7 +143,7 @@ public class LinkedList<T extends Comparable<T>> implements List<T> {
             priorNode.setNext(currentNode.getNext());
             return true;
         } else {
-            System.out.println("找不到data="+data+"的结点");
+            System.out.println("找不到data=" + data + "的结点");
             return false;
         }
     }
@@ -210,6 +214,7 @@ public class LinkedList<T extends Comparable<T>> implements List<T> {
     public void clear() {
         this.getHead().setNext(null);
     }
+
     @Override
     public T get(int index) {
         LinkedListNode<T> node = getNode(index);
@@ -241,6 +246,7 @@ public class LinkedList<T extends Comparable<T>> implements List<T> {
         }
         return true;
     }
+
     @Override
     public boolean insertAfter(int index, T data) {
         LinkedListNode<T> node = getNode(index);
@@ -282,6 +288,7 @@ public class LinkedList<T extends Comparable<T>> implements List<T> {
             next = (index == size()) ? null : getNode(index);
             nextIndex = index;
         }
+
         @Override
         public boolean hasNext() {
             return nextIndex < size();
@@ -298,131 +305,124 @@ public class LinkedList<T extends Comparable<T>> implements List<T> {
             return lastReturned.getData();
         }
     }
+
     //已知一个带头结点的单链表L,
     // 设计一个算法实现链表逆置，要求不增加额外存储空间
-    public void ReverseList()
-    {
-        LinkedListNode<T> p1,p2,p3;
-        if(head.getNext()==null)
+    public void ReverseList() {
+        LinkedListNode<T> p1, p2, p3;
+        if (head.getNext() == null)
             return;
-        p1=head.getNext();
-        if(p1.getNext()==null)
+        p1 = head.getNext();
+        if (p1.getNext() == null)
             return;
-        p2=p1.getNext();
-        p3=p2.getNext();
+        p2 = p1.getNext();
+        p3 = p2.getNext();
         p1.setNext(null);
-        while(p2!=null)
-        {
+        while (p2 != null) {
             p2.setNext(p1);
-            p1=p2;
-            p2=p3;
-            if(p3!=null)
-                p3=p3.getNext();
+            p1 = p2;
+            p2 = p3;
+            if (p3 != null)
+                p3 = p3.getNext();
         }
         head.setNext(p1);
     }
+
     //【例2.8】已知带头结点的单链表L,
     // 设计算法实现查找链表倒数第K个结点。
     // 若查找成功，返回指示指针,否则返回NULL
-    public LinkedListNode<T> getReverseK(int k)
-    {
-        LinkedListNode<T> p1,p2;
-        int count=0;
-        if(head.getNext()==null)
+    public LinkedListNode<T> getReverseK(int k) {
+        LinkedListNode<T> p1, p2;
+        int count = 0;
+        if (head.getNext() == null)
             return null;
-        p1=head.getNext();
-        p2=p1;
-        if(p1.getNext()==null&&k==1)
+        p1 = head.getNext();
+        p2 = p1;
+        if (p1.getNext() == null && k == 1)
             return p1;
-        while(count<k-1)
-        {
-            if(p2!=null)
-                p2=p2.getNext();
+        while (count < k - 1) {
+            if (p2 != null)
+                p2 = p2.getNext();
             count++;
         }
-        if(p2==null)
+        if (p2 == null)
             return null;
-        while(p2.getNext()!=null)
-        {
-            p1=p1.getNext();
-            p2=p2.getNext();
+        while (p2.getNext() != null) {
+            p1 = p1.getNext();
+            p2 = p2.getNext();
         }
         return p1;
     }
+
     //A和B是两个带头结点的单链表，其中元素递增有序，
     // 设计一个算法将A和B归并程一个递增有序的链表C,
     // 要求不能增加额外存储空间
-    public void MergetList(LinkedListNode<T> head2)
-    {
-        LinkedListNode<T> p1,p2,newhead,tail;
-        p1=head.getNext();
-        p2=head2.getNext();
-        if(p1==null||p2==null) {
-            if(p1==null)
-                head=head2;
+    public void MergetList(LinkedListNode<T> head2) {
+        LinkedListNode<T> p1, p2, newhead, tail;
+        p1 = head.getNext();
+        p2 = head2.getNext();
+        if (p1 == null || p2 == null) {
+            if (p1 == null)
+                head = head2;
         }
 
-        if(p1.getData().compareTo(p2.getData())<=0)
-            newhead=head;
+        if (p1.getData().compareTo(p2.getData()) <= 0)
+            newhead = head;
         else
-            newhead=head2;
-        tail=newhead;
-        while(p1!=null&&p2!=null)
-        {
-            if(p1.getData().compareTo(p2.getData())<=0)
-            {
+            newhead = head2;
+        tail = newhead;
+        while (p1 != null && p2 != null) {
+            if (p1.getData().compareTo(p2.getData()) <= 0) {
                 tail.setNext(p1);
-                tail=p1;
-                p1=p1.getNext();
-            }
-            else
-            {
+                tail = p1;
+                p1 = p1.getNext();
+            } else {
                 tail.setNext(p2);
-                tail=p2;
-                p2=p2.getNext();
+                tail = p2;
+                p2 = p2.getNext();
             }
         }
-        if(p1!=null)
+        if (p1 != null)
             tail.setNext(p1);
-        if(p2!=null)
+        if (p2 != null)
             tail.setNext(p2);
 
-        head=newhead;
+        head = newhead;
     }
+
     //有一个带头结点的单链表L=(a1,b1,a2,b2,…an,bn)
 //设计算法将其分拆程两个带头结点的链表L1=(a1,a2,…an),
 // L2=(bn,bn-1,…b2,b1)
-    public LinkedList<T> SplitList()
-    {
-        LinkedList<T> list=new  LinkedList<T>();
-        LinkedListNode<T> L2=new LinkedListNode<T>();
-        LinkedListNode<T> p1,p2=null,tail;
-        p1=head.getNext();
-        if(p1!=null)
-            p2=p1.getNext();
+    public LinkedList<T> SplitList() {
+        LinkedList<T> list = new LinkedList<T>();
+        LinkedListNode<T> L2 = new LinkedListNode<T>();
+        LinkedListNode<T> p1, p2 = null, tail;
+        p1 = head.getNext();
+        if (p1 != null)
+            p2 = p1.getNext();
         list.setHead(L2);
-        tail=head;
-        while(p1!=null&&p2!=null)
-        {
+        tail = head;
+        while (p1 != null && p2 != null) {
             tail.setNext(p1);
-            tail=p1;
-            if(p2!=null)
-                p1=p2.getNext();
+            tail = p1;
+            if (p2 != null)
+                p1 = p2.getNext();
             p2.setNext(L2.getNext());
             L2.setNext(p2);
-            if(p1!=null)
-                p2=p1.getNext();
+            if (p1 != null)
+                p2 = p1.getNext();
         }
-        if(p1!=null) {
+        if (p1 != null) {
             tail.setNext(p1);
             tail = p1;
         }
         tail.setNext(null);
         return list;
     }
+
     public static void main(String[] args) {
-        Integer[] number={10,20,30,40,50,60,70,80,90,100};
-        Integer[] number2={20,40,60,100};
+        Integer[] number = {10, 20, 30, 40, 50, 60, 70, 80, 90, 100};
+        Integer[] number2 = {20, 40, 60, 100};
         LinkedList<Integer> listLinked = new LinkedList<Integer>(number);
         LinkedList<Integer> listLinked2 = listLinked.SplitList();
         listLinked.display();

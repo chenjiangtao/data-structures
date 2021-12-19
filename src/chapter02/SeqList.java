@@ -1,4 +1,5 @@
 package chapter02;
+
 public class SeqList<T extends Comparable<T>> implements List<T> {
 
     /* 算法2-1：定义顺序表数据类型 */
@@ -11,7 +12,7 @@ public class SeqList<T extends Comparable<T>> implements List<T> {
      */
     public SeqList(Object elements[]) {
 
-        this.capacity = (elements.length/10+1)*10;
+        this.capacity = (elements.length / 10 + 1) * 10;
         this.elements = new Object[this.capacity];
         for (int i = 0; i < elements.length; i++) {
             this.elements[i] = elements[i];
@@ -29,7 +30,7 @@ public class SeqList<T extends Comparable<T>> implements List<T> {
         this(10);
     }
 
-    private boolean checkBounds(int index) throws IndexOutOfBoundsException{
+    private boolean checkBounds(int index) throws IndexOutOfBoundsException {
         if ((index < 0) || (index > this.size)) /* 判断输入的位置index是否合法 */ {
             throw new IndexOutOfBoundsException();
         }
@@ -40,10 +41,12 @@ public class SeqList<T extends Comparable<T>> implements List<T> {
     public int size() {
         return size;
     }
+
     @Override
     public boolean isEmpty() {
         return this.size() == 0;
     }
+
     /*算法2-5 查找给定元素值element*/
     @Override
     public int search(T data) {
@@ -56,10 +59,12 @@ public class SeqList<T extends Comparable<T>> implements List<T> {
         else
             return (i); /* 返回查找到的给定值所在下标 */
     }
+
     @Override
     public boolean contains(T data) {
         return search(data) != -1;
     }
+
     @Override
     public void clear() {
         this.size = 0;
@@ -67,27 +72,29 @@ public class SeqList<T extends Comparable<T>> implements List<T> {
 
 
     @Override
-    public T get(int index) throws IndexOutOfBoundsException{
-        if (checkBounds(index)){
+    public T get(int index) throws IndexOutOfBoundsException {
+        if (checkBounds(index)) {
             return (T) this.elements[index];
         }
         return null;
     }
+
     @Override
     public boolean insertAt(int index, T data) {
-        if(checkBounds(index)){
+        if (checkBounds(index)) {
             for (int i = this.size - 1; i >= index + 1; i--) { /* index位置以及之后所有元素后移一位 */
                 this.elements[i + 1] = this.elements[i];
             }
             this.elements[index] = data;
             size++;
-            return  true;
+            return true;
         }
         return false;
     }
+
     @Override
     public boolean insertAfter(int index, T data) {
-        return this.insertAt(index+1,data);
+        return this.insertAt(index + 1, data);
 
     }
 
@@ -126,10 +133,11 @@ public class SeqList<T extends Comparable<T>> implements List<T> {
         this.size = this.size - 1; /* 顺序表元素个数减1 */
         return true; /* 返回删除成功的标志 */
     }
+
     @Override
     public boolean remove(T data) {
         int index = search(data);
-        if(index>0){
+        if (index > 0) {
             return remove(index);
         }
         return false;
@@ -184,14 +192,13 @@ public class SeqList<T extends Comparable<T>> implements List<T> {
         System.out.println("]");
     }
 
-    public void Union(SeqList<T> la,SeqList<T> lb)
-    {
-        int i,j;
-        for(i=0;i<la.size();i++)
-            insertAt(i,la.get(i));
-        for(j=0;j<lb.size();j++)
-            if(la.contains(lb.get(j))==false)
-                insertAt(i++,lb.get(j));
+    public void Union(SeqList<T> la, SeqList<T> lb) {
+        int i, j;
+        for (i = 0; i < la.size(); i++)
+            insertAt(i, la.get(i));
+        for (j = 0; j < lb.size(); j++)
+            if (la.contains(lb.get(j)) == false)
+                insertAt(i++, lb.get(j));
     }
 
     public static void main(String[] args) {
@@ -204,8 +211,8 @@ public class SeqList<T extends Comparable<T>> implements List<T> {
         System.out.println("list after [insertAfter(0,2)] call!");
         sList.display();
         System.out.println("***************************************");
-        SeqList<Integer> listA = new SeqList<Integer>( new Integer[]{10, 20, 30, 40});
-        SeqList<Integer> listB = new SeqList<Integer>( new Integer[]{30, 40, 50, 60});
+        SeqList<Integer> listA = new SeqList<Integer>(new Integer[]{10, 20, 30, 40});
+        SeqList<Integer> listB = new SeqList<Integer>(new Integer[]{30, 40, 50, 60});
         SeqList<Integer> listMerged = listA.merge(listB);
         System.out.println("list A:");
         listA.display();
